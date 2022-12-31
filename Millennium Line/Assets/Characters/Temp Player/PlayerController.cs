@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1f;
     public float collisionOffest = 0.05f;
     public ContactFilter2D movementFilter;
+    private Vector2 boxSize = new Vector2(1f, 1f);
+    GameObject InteractText;
 
     Vector2 movementInput;
     Rigidbody2D rb;
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        InteractText = GameObject.Find("InteractIcon");
+        InteractText.SetActive(false);
     }
 
     private void FixedUpdate(){
@@ -69,5 +73,38 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue movementValue){
         movementInput = movementValue.Get<Vector2>();
+    }
+
+    void OnInteraction() //When interaction key is pressed
+    {
+        CheckInteraction();
+    }
+
+    private void CheckInteraction() //Uses raycast to check for collision
+    {
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position,boxSize,0,Vector2.zero); //stores all hit objects in array
+
+        if(hits.Length > 0)
+        {
+            foreach(RaycastHit2D rc in hits)
+            {
+                if(rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
+                {
+                    rc.transform.GetComponent<Interactable>().Interact();
+                    return; //Return so that we only interact with one item at a time.
+                }
+            }
+        }
+        
+    }
+
+    public void DisplayInteraction() //Display interaction text
+    {
+        InteractText.SetActive(true);
+    }
+
+    public void HideInteraction() //Hide interaction text
+    {
+        InteractText.SetActive(false);
     }
 }
