@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123930509fee5ac48915c1ff79b27680, type: 3}
   m_Name: MedPack
   m_EditorClassIdentifier: 
-  <IsStackable>k__BackingField: 0
-  <MaxStackSize>k__BackingField: 1
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 20
   <Name>k__BackingField: MedPack
   <Description>k__BackingField: Heals a portion of your health
   <ItemImage>k__BackingField: {fileID: 279084783, guid: d0fdc9222df20fe43a00158c4e8b011c, type: 3}
