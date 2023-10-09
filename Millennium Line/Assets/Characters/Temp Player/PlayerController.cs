@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 1f;
     public float collisionOffest = 0.05f;
     public ContactFilter2D movementFilter;
-    private Vector2 boxSize = new Vector2(1f, 1f);
+    private Vector2 boxSize = new Vector2(0.2f, 0.2f);
     GameObject InteractText;
 
     Vector2 movementInput;
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
     public void DisplayInteraction() //Display interaction text
     {
-        InteractText.SetActive(true);
+        InteractText.SetActive(true); 
     }
 
     public void HideInteraction() //Hide interaction text
