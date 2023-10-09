@@ -254,7 +254,7 @@ MonoBehaviour:
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
@@ -5072,6 +5072,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 986303278516835717, guid: 2c47e70179bbf534e9a35497e0dcd75e, type: 3}
       propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814208300884332755, guid: 2c47e70179bbf534e9a35497e0dcd75e, type: 3}
+      propertyPath: m_BodyType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8689253298902578428, guid: 2c47e70179bbf534e9a35497e0dcd75e, type: 3}
