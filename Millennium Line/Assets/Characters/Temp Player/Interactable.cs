@@ -6,6 +6,8 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+
+    [SerializeField] GameObject interactionBox;
     
     private void Reset() 
     {
@@ -18,7 +20,8 @@ public abstract class Interactable : MonoBehaviour
     {
         if(collision.CompareTag("Player")) 
         {
-            collision.GetComponent<PlayerController>().DisplayInteraction(); 
+            interactionBox.SetActive(true);
+            collision.GetComponent<PlayerControllerSide>().DisplayInteraction(); 
         }
     }
 
@@ -26,7 +29,8 @@ public abstract class Interactable : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerController>().HideInteraction();
+            interactionBox.SetActive(false);
+            collision.GetComponent<PlayerControllerSide>().HideInteraction();
         }
     }
 }

@@ -5,17 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Ladder
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - PlayerColliders
+  - Climbable
+  - ClimbableDetector
+  - PassthroughPlatform
   - 
   - 
   - 
