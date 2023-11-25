@@ -18,6 +18,8 @@ namespace Inventory
 
         public List<InventoryItem> initialItems = new List<InventoryItem>();
 
+        public GameObject Phone;
+
         private void Start()
         {
             PrepareUI();
@@ -87,6 +89,11 @@ namespace Inventory
 
         void OnInventoryToggle()
         {
+            ToggleInventory();
+        }
+
+        void ToggleInventory()
+        {
             if (inventoryUI.isActiveAndEnabled == false)
             {
                 inventoryUI.Show();
@@ -100,6 +107,19 @@ namespace Inventory
             else
             {
                 inventoryUI.Hide();
+            }
+        }
+
+        void OnTogglePhone()
+        {
+            Debug.Log("heehee");
+            if(Phone.activeSelf == true)
+            {
+                Phone.SetActive(false);
+            }
+            else
+            {
+                Phone.SetActive(true);
             }
         }
     }

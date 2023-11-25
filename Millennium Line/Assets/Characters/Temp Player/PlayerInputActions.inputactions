@@ -42,18 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "InventoryToggle",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "91813ab3-e6a1-48d1-a128-6ae130cb0d46",
+                    "id": "103c8e70-aef6-4d74-9a82-d10576b08854",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "TogglePhone",
                     "type": "Button",
-                    "id": "103c8e70-aef6-4d74-9a82-d10576b08854",
+                    "id": "cacd2a79-f009-4342-b7f2-d95e7e0f2291",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -294,23 +294,23 @@
                 },
                 {
                     "name": "",
-                    "id": "035cf27a-ce09-402f-a038-6cbea642d331",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "InventoryToggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ce666156-d961-4be5-abc5-a23ac59fc629",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e6a69c2-4eac-4a40-a236-64c640922e0b",
+                    "path": "<Keyboard>/#(I)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "TogglePhone",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
