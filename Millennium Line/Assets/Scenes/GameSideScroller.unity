@@ -3162,6 +3162,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4707467240398534580, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707467240398534580, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707467240398534580, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707467240398534580, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886296994793415093, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886296994793415093, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886296994793415093, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886296994793415093, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8654898896312013967, guid: 1784fda9bd325e74497458ebd3ad8516, type: 3}
       propertyPath: m_Name
       value: Tab area
