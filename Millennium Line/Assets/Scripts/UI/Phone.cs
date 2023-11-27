@@ -1,18 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Phone : MonoBehaviour
 {
     public GameObject phone;
-    public GameObject questLog;
-    public GameObject questButton;
-    
+    private GameObject[] tabButtons;
+    private GameObject[] tabs;
+    public GameObject inventory;
+    public GameObject inventoryButton;
+    public GameObject quests;
+    public GameObject questsButton;
+    public GameObject contacts;
+    public GameObject contactsButton;
+    private int activeTab = 42069;
+
     // Start is called before the first frame update
     void Start()
     {
+        tabs = new GameObject[3];
+        tabButtons = new GameObject[3];
+        tabs[0] = inventory;
+        tabs[1] = quests;
+        tabs[2] = contacts;
+
+        tabButtons[0] = inventoryButton;
+        tabButtons[1] = questsButton;
+        tabButtons[2] = contactsButton;
+
+        foreach(GameObject x in tabs)
+        {
+            x.SetActive(false);
+        }
+
+        foreach (GameObject y in tabButtons)
+        {
+            y.SetActive(true);
+            Debug.Log(y.ToString());
+        }
         phone.SetActive(false);
-        questLog.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,25 +50,28 @@ public class Phone : MonoBehaviour
         {
             phone.SetActive(!phone.activeSelf);
         }
-
     }
 
-    public void QuestButtonClick()
+    public void ButtonClick(int button)
     {
-        questButton.SetActive(false);
-        questLog.SetActive(true);
+        tabs[button].SetActive(true);
+        activeTab = button;
+        foreach (GameObject y in tabButtons)
+        {
+            y.SetActive(false);
+        }
+
     }
 
     public void BackButtonClick()
     {
-        if (phone.activeSelf && questLog.activeSelf)
+        if (activeTab != 42069)
         {
-            questLog.SetActive(false);
-            questButton.SetActive(true);
-        }
-        else if (phone.activeSelf)
-        {
-            phone.SetActive(false);
+            tabs[activeTab].SetActive(false);
+            foreach (GameObject y in tabButtons)
+            {
+                y.SetActive(true);
+            }
         }
     }
 }
