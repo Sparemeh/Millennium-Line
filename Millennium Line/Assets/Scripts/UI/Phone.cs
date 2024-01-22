@@ -29,11 +29,8 @@ public class Phone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("egg 1");
         contactInfoHolder.SetActive(true);
         phone.SetActive(true);
-
-        Debug.Log("egg 2");
 
         tabs = new GameObject[numTabs];
         tabButtons = new GameObject[numTabs];
@@ -68,7 +65,6 @@ public class Phone : MonoBehaviour
         for (int x = 0; x <= numContacts; x++)
         {
             contactInfos[x] = GameObject.Find("/Canvas/PlayerUI/Phone/ContactInfo/contactInfo" + x);
-            Debug.Log("Info page: " + contactInfos[x]);
         }
 
         //initializes every possible tab
