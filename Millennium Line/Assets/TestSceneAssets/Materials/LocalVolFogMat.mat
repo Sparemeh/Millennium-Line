@@ -74,7 +74,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DetailTiling: 10
+    - _DetailTiling: 9.34
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
@@ -83,10 +83,10 @@ Material:
     - _Float: 2
     - _OpaqueCullMode: 2
     - _RenderQueueType: 1
-    - _ScrollSpeed: 0.1
+    - _ScrollSpeed: 0.05
     - _SrcBlend: 1
     - _SurfaceType: 0
-    - _Tiling: 0.5
+    - _Tiling: 0.12
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
