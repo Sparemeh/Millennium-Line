@@ -23,6 +23,7 @@ public class Phone : MonoBehaviour
     public GameObject[] contactButtons;
     public GameObject[] contactInfos;
     public int numContacts;
+
     public int contactID;
     public GameObject contactInfoHolder;
 
@@ -46,8 +47,8 @@ public class Phone : MonoBehaviour
         tabButtons[1] = questsButton;
         tabButtons[2] = contactsButton;
 
-        contactButtons = new GameObject[numContacts];
-        contactInfos = new GameObject[numContacts];
+        contactButtons = new GameObject[3];
+        contactInfos = new GameObject[3];
         numContacts = 2;
 
 
@@ -67,8 +68,9 @@ public class Phone : MonoBehaviour
         //initializes the contact info pages
         for (int x = 0; x <= numContacts; x++)
         {
-            contactInfos[x] = GameObject.Find("/Canvas/PlayerUI/Phone/ContactInfo/contactInfo" + x);
+            contactInfos[x] = GameObject.Find("/Canvas/PlayerUI/Phone/ContactInfo/Scroll/Panel/contactInfo" + x);
             Debug.Log("Info page: " + contactInfos[x]);
+            Debug.Log(contactInfos[x]);
         }
 
         //initializes every possible tab
