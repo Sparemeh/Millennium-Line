@@ -34,7 +34,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float ladderSpeed;
     [SerializeField] float hangSpeed;
     [SerializeField] Collider2D[] heightCheckColliders;
-    [SerializeField] LayerMask vaultableLayers;
+
+    // The layers in which the player can mount/move on
+    [SerializeField] LayerMask environmentLayers;
+
+    // The layers that can be used for climbing (ladders for example)
     [SerializeField] LayerMask climbableLayers;
 
     Vector2 movementInput;
@@ -71,7 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             if(movementInput.y < 0)
             {
-                RaycastHit2D platformDetection = Physics2D.Raycast(transform.position - Vector3.up * 0.1f, Vector3.up, 0.1f, vaultableLayers);
+                RaycastHit2D platformDetection = Physics2D.Raycast(transform.position - Vector3.up * 0.1f, Vector3.up, 0.1f, environmentLayers);
 
                 // If the platform exists AND the platform is thin enough, then we can hang (a thin platform will return 0.03). Otherwise, valut as usuall
                 if (platformDetection.collider != null && transform.position.y - platformDetection.collider.transform.position.y < 0.1f)
@@ -93,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
         if(movementState == MovementState.Ladder)
         {
-            RaycastHit2D upperPlatformDetection = Physics2D.Raycast(transform.position + Vector3.up * 2.1f, Vector3.down, 0.15f, vaultableLayers);
+            RaycastHit2D upperPlatformDetection = Physics2D.Raycast(transform.position + Vector3.up * 2.1f, Vector3.down, 0.15f, environmentLayers);
             Debug.DrawRay(transform.position + Vector3.up * 2.1f, Vector3.down, Color.red, 1f);
 
             Debug.Log(upperPlatformDetection.collider == null); 
@@ -190,10 +194,7 @@ public class PlayerController : MonoBehaviour
                 facingRight = Mathf.Sign(currentMovementX) == 1;
                 rb.velocity = new Vector2(currentMovementX, rb.velocity.y);
             }
-            else
-            {
 
-            }
         }
 
         if(movementState == MovementState.Animation)
@@ -239,7 +240,7 @@ public class PlayerController : MonoBehaviour
             rb.isKinematic = false;
             if (playerControlled)
             {
-                RaycastHit2D upperPlatformDetection = Physics2D.Raycast(transform.position + Vector3.up * 2f, Vector3.up, 0.1f, vaultableLayers);
+                RaycastHit2D upperPlatformDetection = Physics2D.Raycast(transform.position + Vector3.up * 2f, Vector3.up, 0.1f, environmentLayers);
 
                 // Check if the player is still under a platform
                 if (upperPlatformDetection.collider != null)
@@ -268,7 +269,7 @@ public class PlayerController : MonoBehaviour
 
         // Is there an object? Is it not too low? If so, then vault
         Vector3 direction = facingRight ? Vector3.right : Vector3.left;
-        RaycastHit2D forwardHit = Physics2D.Raycast(heightCheckColliders[0].transform.position + heightCheckColliders[0].bounds.size.x / 2 * direction, Vector3.down, 1, vaultableLayers);
+        RaycastHit2D forwardHit = Physics2D.Raycast(heightCheckColliders[0].transform.position + heightCheckColliders[0].bounds.size.x / 2 * direction, Vector3.down, 1, environmentLayers);
         Debug.DrawRay(heightCheckColliders[0].transform.position + heightCheckColliders[0].bounds.size.x / 2 * direction, Vector3.down, Color.red);
 
         if(forwardHit.collider != null)
@@ -371,7 +372,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator StartHang()
     {
-        RaycastHit2D platformDetection = Physics2D.Raycast(transform.position - Vector3.up * 0.1f, Vector3.up, 0.1f, vaultableLayers);
+        RaycastHit2D platformDetection = Physics2D.Raycast(transform.position - Vector3.up * 0.1f, Vector3.up, 0.1f, environmentLayers);
         if (platformDetection.collider != null)
         {
             movementState = MovementState.Animation;
@@ -405,7 +406,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ClimbUpLedge()
     {
-        RaycastHit2D groundDetection = Physics2D.Raycast(transform.position + Vector3.up * 2.1f, Vector3.down, 0.15f, vaultableLayers);
+        RaycastHit2D groundDetection = Physics2D.Raycast(transform.position + Vector3.up * 2.1f, Vector3.down, 0.15f, environmentLayers);
         if (groundDetection.collider != null)
         {
             movementState = MovementState.Animation;
