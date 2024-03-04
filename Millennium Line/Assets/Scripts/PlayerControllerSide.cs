@@ -27,9 +27,11 @@ public class PlayerControllerSide : MonoBehaviour
 
     void OnJump(InputValue movementValue)
     {
+        
         Debug.Log(movementValue.Get<float>());
         goingToJump = movementValue.Get<float>() != 0;
     }
+    
 
     void Update()
     {
@@ -70,6 +72,7 @@ public class PlayerControllerSide : MonoBehaviour
 
     void OnInteraction() //When interaction key is pressed
     {
+        
         CheckInteraction();
     }
 
@@ -81,8 +84,10 @@ public class PlayerControllerSide : MonoBehaviour
         {
             foreach (RaycastHit2D rc in hits)
             {
+                Debug.Log("interacting");
                 if (rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
                 {
+                    
                     rc.transform.GetComponent<Interactable>().Interact();
                     return; //Return so that we only interact with one item at a time.
                 }
