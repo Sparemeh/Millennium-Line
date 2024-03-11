@@ -20,17 +20,18 @@ public class Phone : MonoBehaviour
     private int activeTab = 42069;
 
 
-    public GameObject[] contactButtons;
-    public GameObject[] contactInfos;
-    public int numContacts;
-    public int contactID;
-    public GameObject contactInfoHolder;
+    public GameObject[] questButtons;
+    public GameObject[] questInfos;
+
+    public int numQuests;
+    public int questID;
+    public GameObject questInfoHolder;
 
     // Start is called before the first frame update
     void Start()
     {
-        contactInfoHolder.SetActive(true);
         phone.SetActive(true);
+        questInfoHolder.SetActive(true);
 
         tabs = new GameObject[numTabs];
         tabButtons = new GameObject[numTabs];
@@ -43,30 +44,18 @@ public class Phone : MonoBehaviour
         tabButtons[1] = questsButton;
         tabButtons[2] = contactsButton;
 
-        contactButtons = new GameObject[numContacts];
-        contactInfos = new GameObject[numContacts];
-        numContacts = 2;
-
-
-        /*
-         *PRETTY SURE WE DON'T NEED THIS CODE, BUT IT WAS ANNOYING TO TYPE SO IM LEAVING IT HERE JUST IN CASE
-         * 
-         * 
-        //initializes the contact buttons
-        for (int x = 0; x <= numContacts; x++)
+        numQuests = 2;
+        questButtons = new GameObject[numQuests];
+        questInfos = new GameObject[numQuests+1];
+        
+        
+        //initializes the quest info pages
+        for (int x = 0; x <= numQuests; x++)
         {
-            contactButtons[x] = GameObject.Find("/Canvas/PlayerUI/Phone/ContactList/Scroll/Panel/Contact" + x + "/Button");
-            Debug.Log("Button: " + contactButtons[x]);
+            questInfos[x] = GameObject.Find("/Canvas/PlayerUI/Phone/QuestInfo/Panel/questInfo" + x);
+            Debug.Log(questInfos[x]);
         }
-        */
-
-
-        //initializes the contact info pages
-        for (int x = 0; x <= numContacts; x++)
-        {
-            contactInfos[x] = GameObject.Find("/Canvas/PlayerUI/Phone/ContactInfo/contactInfo" + x);
-        }
-
+        
         //initializes every possible tab
         foreach (GameObject x in tabs)
         {
@@ -80,7 +69,7 @@ public class Phone : MonoBehaviour
         }
 
         //initializes contact info page
-        contactInfoHolder.SetActive(false);
+        questInfoHolder.SetActive(false);
         phone.SetActive(false);
 
     }
@@ -104,13 +93,13 @@ public class Phone : MonoBehaviour
         }
     }
 
-    public void ContactClick(int id)
+    public void QuestClick(int id)
     {
-        contactInfoHolder.SetActive(true);
+        Debug.Log("Quest clicked!");
+        questInfoHolder.SetActive(true);
 
-        foreach (GameObject x in contactInfos)
+        foreach (GameObject x in questInfos)
         {
-            Debug.Log(x);
             if (x != null)
             {
                 x.SetActive(false);
@@ -118,8 +107,8 @@ public class Phone : MonoBehaviour
         }
 
         tabs[activeTab].SetActive(false);
-        contactInfos[id].SetActive(true);
-        contactID = id;
+        questInfos[id].SetActive(true);
+        questID = id;
         activeTab = 11;
     }
 
@@ -133,7 +122,7 @@ public class Phone : MonoBehaviour
         {
             x.SetActive(false);
         }
-        foreach (GameObject x in contactInfos)
+        foreach (GameObject x in questInfos)
         {
             x.SetActive(false);
         }
@@ -152,10 +141,10 @@ public class Phone : MonoBehaviour
             }
             else
             {
-                contactInfos[contactID].SetActive(false);
-                contactInfoHolder.SetActive(false);
-                tabs[2].SetActive(true);
-                activeTab = 2;
+                questInfos[questID].SetActive(false);
+                questInfoHolder.SetActive(false);
+                tabs[1].SetActive(true);
+                activeTab = 1;
             }
         }
     }
