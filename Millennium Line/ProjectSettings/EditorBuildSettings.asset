@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 34e1c0996ae2b534983e7e54c5b35276
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameSideScroller.unity
     guid: 4a663260b3cf93546b4569a13f645ae9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: f0b5504c506aaa4478c346a5955cff65
   m_configObjects: {}

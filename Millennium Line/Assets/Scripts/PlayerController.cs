@@ -31,12 +31,16 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float groundSpeed;
+    [SerializeField] float sprintSpeed;
     [SerializeField] float ladderSpeed;
     [SerializeField] float hangSpeed;
     [SerializeField] Collider2D[] heightCheckColliders;
 
     // The layers in which the player can mount/move on
     [SerializeField] LayerMask environmentLayers;
+
+    [SerializeField] string[] tagExceptions;
+    
 
     // The layers that can be used for climbing (ladders for example)
     [SerializeField] LayerMask climbableLayers;
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
     bool playerControlled = true; //variable to indicate whether player has control (off when mantling)
 
     bool jumpPressed = false;
+    bool sprintEnabled = false;
 
     enum MovementState
     {
@@ -84,13 +89,13 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    StartCoroutine(Vault());
+                    StartCoroutine(NewVault());
                 }
             }
             else
             {
                 // If player is not trying to hang, then vault
-                StartCoroutine(Vault());
+                StartCoroutine(NewVault());
             }
             
         }
@@ -124,6 +129,18 @@ public class PlayerController : MonoBehaviour
             else
             {
                 movementState = MovementState.Normal;
+            }
+        }
+
+        if(movementState == MovementState.SideHanging)
+        {
+            if (movementInput.y < 0)
+            {
+                movementState = MovementState.Normal;
+            }
+            else
+            {
+                StartCoroutine(ClimbUpSideLedge());
             }
         }
 
@@ -172,6 +189,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnSprint(InputValue movementValue)
+    {
+        sprintEnabled = movementValue.Get<float>() != 0;
+        Debug.Log("sprint = " + movementValue.Get<float>());
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -184,15 +207,19 @@ public class PlayerController : MonoBehaviour
     {
         // Depending on the movement state, a different part of the code will run. 
 
-        if(movementState == MovementState.Normal)
+        facingRight = Mathf.Sign(movementInput.x) == 1;
+
+        if (movementState == MovementState.Normal)
         {
             rb.gravityScale = 1;
             rb.isKinematic = false;
             if (playerControlled)
             {
-                float currentMovementX = movementInput.x * groundSpeed;
-                facingRight = Mathf.Sign(currentMovementX) == 1;
-                rb.velocity = new Vector2(currentMovementX, rb.velocity.y);
+                float movementX = movementInput.x * (sprintEnabled ? sprintSpeed : groundSpeed);
+
+                rb.velocity = new Vector2(movementX, rb.velocity.y);
+
+                
             }
 
         }
@@ -256,30 +283,112 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+
+        if(movementState == MovementState.SideHanging)
+        {
+            rb.gravityScale = 0f;
+            rb.isKinematic = false;
+            if (playerControlled)
+            {
+                Vector3 direction = facingRight ? Vector3.right : Vector3.left;
+                RaycastHit2D upperPlatformDetection = Physics2D.Raycast(transform.position + Vector3.up * 2f + direction * heightCheckColliders[1].bounds.size.x / 2, Vector3.down, 0.2f, environmentLayers);
+
+                // Check if the player is still under a platform, or if the player moves the other way
+                if (upperPlatformDetection.collider == null || facingRight && movementInput.x < 0 || !facingRight && movementInput.x > 0)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                    movementState = MovementState.Normal;
+                }
+
+            }
+        }
         
+    }
+
+    IEnumerator NewVault()
+    {
+        // Is there an object? Is it not too low? If so, then vault
+        Vector3 direction = facingRight ? Vector3.right : Vector3.left;
+
+        // Raycasts to check vault conditions
+        RaycastHit2D bottomCheck = Physics2D.Raycast(heightCheckColliders[0].transform.position + heightCheckColliders[0].bounds.size.x / 2 * direction, Vector3.down, 0.2f, environmentLayers);
+        RaycastHit2D topCheck = Physics2D.Raycast(heightCheckColliders[1].transform.position + heightCheckColliders[1].bounds.size.x / 2 * direction, Vector3.up, 2f, environmentLayers);
+        RaycastHit2D positionDeterminant = Physics2D.Raycast(heightCheckColliders[1].transform.position + 1f * direction, Vector3.down, 1.5f, environmentLayers);
+        RaycastHit2D positionDeterminantCheck = Physics2D.Raycast(heightCheckColliders[1].transform.position + 1f * direction, Vector3.up, 2f, environmentLayers);
+        
+       
+        // Checks for determining if we can vault:
+        // Is there an object to vault over
+        // If there is a suitable spot to vault to
+        // If the object we are vaulting over doesn't have a special exception tag
+        // The gap between the floor and ceiling is high enough
+
+        if (bottomCheck.collider != null && positionDeterminant.collider != null && CheckExceptionTags(bottomCheck.collider.tag) &&
+            (topCheck.point.y - positionDeterminant.point.y > 2f && positionDeterminantCheck.point.y - positionDeterminant.point.y > 2f)) 
+        {
+            gravityEnabled = false;
+            playerControlled = false;
+
+            movementState = MovementState.Animation;
+                
+            float newTargetXPosition = positionDeterminant.point.x;
+            float newTargetYPosition = positionDeterminant.point.y;
+
+            float initialX = rb.position.x;
+            float initialY = rb.position.y;
+            float timeElapsed = 0;
+            float duration = 0.3f; // You can adjust the duration for how fast/slow you want the vaulting to be
+
+            while (timeElapsed < duration)
+            {
+                float newX = Mathf.Lerp(initialX, newTargetXPosition, timeElapsed / duration);
+                float newY = Mathf.Lerp(initialY, newTargetYPosition, timeElapsed / duration);
+                rb.position = new Vector2(newX, newY);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            gravityEnabled = true;
+            playerControlled = true;
+
+            movementState = MovementState.Normal;
+        }
+        else
+        {
+            yield return null;
+        }
+
+    }
+
+    bool CheckExceptionTags(string tag)
+    {
+        for(int i = 0; i < tagExceptions.Length; i++)
+        {
+            if (tagExceptions[i].ToString() == tag) { return false; }
+        }
+
+        return true;
     }
 
     IEnumerator Vault()
     {
-        // If the obstacle exceeds the maximum vault height, then exit
-        if (heightCheckColliders[0].GetComponent<PlayerCollider>().IsColliding())
-        {
-            yield break;
-        }
-
         // Is there an object? Is it not too low? If so, then vault
         Vector3 direction = facingRight ? Vector3.right : Vector3.left;
-        RaycastHit2D forwardHit = Physics2D.Raycast(heightCheckColliders[0].transform.position + heightCheckColliders[0].bounds.size.x / 2 * direction, Vector3.down, 1, environmentLayers);
-        Debug.DrawRay(heightCheckColliders[0].transform.position + heightCheckColliders[0].bounds.size.x / 2 * direction, Vector3.down, Color.red);
+        RaycastHit2D vaultHitDown = Physics2D.Raycast(heightCheckColliders[1].transform.position + heightCheckColliders[1].bounds.size.x / 2 * direction, Vector3.down, 1f, environmentLayers);
+        RaycastHit2D vaultHitUp = Physics2D.Raycast(heightCheckColliders[1].transform.position + heightCheckColliders[1].bounds.size.x / 2 * direction, Vector3.up, 0.02f, environmentLayers);
+        Debug.DrawRay(heightCheckColliders[0].transform.position + heightCheckColliders[1].bounds.size.x / 2 * direction, Vector3.down, Color.red);
 
-        if(forwardHit.collider != null)
+        RaycastHit2D climbHitDown = Physics2D.Raycast(heightCheckColliders[2].transform.position + heightCheckColliders[2].bounds.size.x / 2 * direction, Vector3.down, 1f, environmentLayers);
+        RaycastHit2D climbHitUp = Physics2D.Raycast(heightCheckColliders[2].transform.position + heightCheckColliders[2].bounds.size.x / 2 * direction, Vector3.up, 0.02f, environmentLayers);
+
+        if (vaultHitDown.collider != null && vaultHitUp.collider == null)
         {
             gravityEnabled = false;
             playerControlled = false;
 
             movementState = MovementState.Animation;
 
-            float newTargetYPosition = forwardHit.point.y;
+            float newTargetYPosition = vaultHitDown.point.y;
 
             float initialY = rb.position.y;
             float timeElapsed = 0;
@@ -298,9 +407,35 @@ public class PlayerController : MonoBehaviour
 
             movementState = MovementState.Normal;
         }
+        else if (climbHitDown.collider != null && climbHitUp.collider == null)
+        {
+            gravityEnabled = false;
+            playerControlled = false;
+
+            movementState = MovementState.Animation;
+
+            float newTargetYPosition = vaultHitDown.point.y - 1;
+
+            float initialY = rb.position.y;
+            float timeElapsed = 0;
+            float duration = 0.3f; // You can adjust the duration for how fast/slow you want the vaulting to be
+
+            while (timeElapsed < duration)
+            {
+                float newY = Mathf.Lerp(initialY, newTargetYPosition, timeElapsed / duration);
+                rb.position = new Vector2(rb.position.x, newY);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            gravityEnabled = true;
+            playerControlled = true;
+
+            movementState = MovementState.SideHanging;
+
+        }
         else
         {
-            
             yield return null;
         }
     }
@@ -407,6 +542,39 @@ public class PlayerController : MonoBehaviour
     IEnumerator ClimbUpLedge()
     {
         RaycastHit2D groundDetection = Physics2D.Raycast(transform.position + Vector3.up * 2.1f, Vector3.down, 0.15f, environmentLayers);
+        if (groundDetection.collider != null)
+        {
+            movementState = MovementState.Animation;
+
+            float newTargetYPosition = groundDetection.point.y;
+
+            float initialY = rb.position.y;
+            float timeElapsed = 0;
+            float duration = 0.7f; // You can adjust the duration for how fast/slow you want the vaulting to be
+
+            while (timeElapsed < duration)
+            {
+                float newY = Mathf.Lerp(initialY, newTargetYPosition, timeElapsed / duration);
+                rb.position = new Vector2(rb.position.x, newY);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            gravityEnabled = true;
+            playerControlled = true;
+
+            movementState = MovementState.Normal;
+        }
+        else
+        {
+            yield return null;
+        }
+    }
+
+    IEnumerator ClimbUpSideLedge()
+    {
+        Vector3 direction = facingRight ? Vector3.right : Vector3.left;
+        RaycastHit2D groundDetection = Physics2D.Raycast(transform.position + Vector3.up * 2.1f + direction * heightCheckColliders[1].bounds.size.x / 2, Vector3.down, 0.15f, environmentLayers);
         if (groundDetection.collider != null)
         {
             movementState = MovementState.Animation;
