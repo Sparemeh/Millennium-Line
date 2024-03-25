@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     bool jumpPressed = false;
     bool sprintEnabled = false;
 
+    private Vector2 boxSize = new Vector2(0.2f, 0.2f);
+
     enum MovementState
     {
         Normal,
@@ -193,6 +195,29 @@ public class PlayerController : MonoBehaviour
     {
         sprintEnabled = movementValue.Get<float>() != 0;
         Debug.Log("sprint = " + movementValue.Get<float>());
+    }
+
+    void OnInteraction() //When interaction key is pressed
+    {
+        CheckInteraction();
+    }
+
+    private void CheckInteraction() //Uses raycast to check for collision
+    {
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, boxSize, 0, Vector2.zero); //stores all hit objects in array
+
+        if (hits.Length > 0)
+        {
+            foreach (RaycastHit2D rc in hits)
+            {
+                if (rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
+                {
+                    rc.transform.GetComponent<Interactable>().Interact();
+                    return; //Return so that we only interact with one item at a time.
+                }
+            }
+        }
+
     }
 
     // Start is called before the first frame update

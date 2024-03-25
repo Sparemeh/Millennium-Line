@@ -18,19 +18,19 @@ public abstract class Interactable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //Runs DisplayInteraction() if the detected obj is player
     {
-        if(collision.CompareTag("Player")) 
-        {
-            interactionBox.SetActive(true);
-            collision.GetComponent<PlayerControllerSide>().DisplayInteraction(); 
-        }
+        //if(collision.CompareTag("Player")) 
+        //{
+        //    interactionBox.SetActive(true);
+        //    collision.GetComponent<PlayerControllerSide>().DisplayInteraction(); 
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision) //Runs HideInteraction() if the detected obj is player
     {
-        if(collision.CompareTag("Player"))
-        {
-            interactionBox.SetActive(false);
-            collision.GetComponent<PlayerControllerSide>().HideInteraction();
-        }
+        //if(collision.CompareTag("Player"))
+        //{
+        //    interactionBox.SetActive(false);
+        //    collision.GetComponent<PlayerControllerSide>().HideInteraction();
+        //}
     }
 }
