@@ -5,20 +5,21 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Ladder
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerColliders
+  - Climbable
+  - ClimbableDetector
+  - PassthroughPlatform
+  - Environment
+  - NPC
+  - Items
   - 
   - 
   - 
@@ -41,7 +42,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: CameraRain
-    uniqueID: 2003777189
     locked: 0
