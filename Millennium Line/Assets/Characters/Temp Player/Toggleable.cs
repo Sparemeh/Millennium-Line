@@ -8,9 +8,6 @@ public class Toggleable : Interactable //Inherits from Interactable class
 {
     public Sprite open;
     public Sprite closed;
-    public GameObject displayText;
-
-    public GameObject interactCanvas;
 
     private SpriteRenderer sr;
     private bool isOpen;
@@ -28,7 +25,6 @@ public class Toggleable : Interactable //Inherits from Interactable class
 
         isOpen = !isOpen;
 
-        interactCanvas.SetActive(true);
     }
     
     private void Start() 
@@ -37,19 +33,4 @@ public class Toggleable : Interactable //Inherits from Interactable class
         sr.sprite = closed;   
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) //Runs DisplayInteraction() if the detected obj is player
-    {
-        if (collision.CompareTag("Player"))
-        {
-            displayText.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) //Runs HideInteraction() if the detected obj is player
-    {
-        if (collision.CompareTag("Player"))
-        {
-            displayText.SetActive(false);
-        }
-    }
 }
