@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,6 +19,9 @@ public class Phone : MonoBehaviour
     public GameObject contactsButton;
     public int numTabs = 3;
     private int activeTab = 42069;
+
+    private bool moving;
+    private bool up;
 
 
     public GameObject[] questButtons;
@@ -47,8 +51,12 @@ public class Phone : MonoBehaviour
         numQuests = 2;
         questButtons = new GameObject[numQuests];
         questInfos = new GameObject[numQuests+1];
+
+        moving = false;
+        up = false;
+
         
-        
+
         //initializes the quest info pages
         for (int x = 0; x <= numQuests; x++)
         {
@@ -72,20 +80,60 @@ public class Phone : MonoBehaviour
         questInfoHolder.SetActive(false);
         phone.SetActive(false);
 
+
     }
+    private Vector3 targetPosition;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        
+        Debug.Log(phone.transform.position);
+        if (Input.GetKeyDown(KeyCode.P) && !moving)
         {
-            phone.SetActive(!phone.activeSelf);
+            //phone.SetActive(!phone.activeSelf);
+            moving = !moving;
+
         }
+
+        if (moving)
+        {
+            if (up)
+            {
+                phone.transform.position += new Vector3(0, -2, 0);
+
+                if (phone.transform.position.y <= -100)
+                {
+                    moving = false;
+                    up = false;
+                }
+            } 
+            else
+            {
+                phone.transform.position += new Vector3(0, 2, 0);
+
+                if (phone.transform.position.y >= 160)
+                {
+                    moving = false;
+                    up = true;
+                }
+            }
+            
+        }
+
+        
+    }
+
+    private void phoneAnimation()
+    {
+        
     }
 
     public void ButtonClick(int button)
     {
+        Debug.Log(button);
         tabs[button].SetActive(true);
+
         activeTab = button;
         foreach (GameObject y in tabButtons)
         {

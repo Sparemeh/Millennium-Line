@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0054204897, g: 0.007835074, b: 0.017165292, a: 1}
+  m_IndirectSpecularColor: {r: 0.0053536254, g: 0.00775422, b: 0.017101081, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3400,7 +3400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1612.2878, y: -547.68427}
+  m_AnchoredPosition: {x: 1612.2878, y: -1121}
   m_SizeDelta: {x: 512.396, y: 754.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &831571244
@@ -3915,11 +3915,11 @@ MonoBehaviour:
   contacts: {fileID: 1892424902}
   contactsButton: {fileID: 1676278773}
   numTabs: 3
-  contactButtons: []
-  contactInfos: []
-  numContacts: 5
-  contactID: 0
-  contactInfoHolder: {fileID: 1438857052}
+  questButtons: []
+  questInfos: []
+  numQuests: 0
+  questID: 0
+  questInfoHolder: {fileID: 0}
 --- !u!114 &878706480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4888,6 +4888,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e21aec978dc2184dbf0c020d951dacc, type: 3}
+--- !u!1 &1029820068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1029820069}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1029820069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029820068}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 900, y: 270, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1036812990
 GameObject:
   m_ObjectHideFlags: 0
@@ -5342,6 +5373,7 @@ MonoBehaviour:
   m_Script: {fileID: 2001162192}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &1123880535
 Transform:
   m_ObjectHideFlags: 19
@@ -14426,3 +14458,4 @@ SceneRoots:
   - {fileID: 1858034079}
   - {fileID: 878706484}
   - {fileID: 379237465}
+  - {fileID: 1029820069}
