@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        InteractText = GameObject.Find("InteractIcon");
+        //InteractText = GameObject.Find("InteractIcon");
         InteractText.SetActive(false);
     }
 
@@ -87,11 +87,12 @@ public class PlayerController : MonoBehaviour
 
         if(hits.Length > 0)
         {
-            foreach(RaycastHit2D rc in hits)
+            foreach (RaycastHit2D rc in hits)
             {
                 if(rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
                 {
-                    rc.transform.GetComponent<Interactable>().Interact();
+                    //rc.transform.GetComponent<Interactable>().Interact();
+                    Debug.Log(rc.collider.gameObject.name);
                     return; //Return so that we only interact with one item at a time.
                 }
             }
@@ -99,13 +100,13 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void DisplayInteraction() //Display interaction text
-    {
-        InteractText.SetActive(true); 
-    }
+    //public void DisplayInteraction() //Display interaction text
+    //{
+    //    InteractText.SetActive(true); 
+    //}
 
-    public void HideInteraction() //Hide interaction text
-    {
-        InteractText.SetActive(false);
-    }
+    //public void HideInteraction() //Hide interaction text
+    //{
+    //    InteractText.SetActive(false);
+    //}
 }
