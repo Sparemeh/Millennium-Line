@@ -78,7 +78,7 @@ public class Phone : MonoBehaviour
 
         //initializes contact info page
         questInfoHolder.SetActive(false);
-        phone.SetActive(false);
+        //phone.SetActive(false);
 
 
     }
@@ -89,6 +89,7 @@ public class Phone : MonoBehaviour
     {
         
         Debug.Log(phone.transform.position);
+
         if (Input.GetKeyDown(KeyCode.P) && !moving)
         {
             //phone.SetActive(!phone.activeSelf);
