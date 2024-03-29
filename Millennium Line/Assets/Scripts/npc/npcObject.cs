@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class npcObject : Interactable
 {
@@ -10,11 +11,18 @@ public class npcObject : Interactable
     public GameObject NPCDialogue;
     public Sprite myImage;
     public bool uniqueDialogue;
+    public bool interactable = true;
+    public UnityEvent onStartInteraction;
+    public UnityEvent onInteract;
+    public UnityEvent onEndInteraction;
+    public bool disableDistanceCheck;
+
+    bool startedInteraction = false;
 
     public override void Interact()
     {
-        Debug.Log("interact");
-        TriggerDialogue();
+        if(interactable) TriggerDialogue();
+
     }
 
     // Start is called before the first frame update
@@ -47,12 +55,57 @@ public class npcObject : Interactable
         //FindObjectOfType<DialogueManager>().StartDialogue(speech, myImage);
         if (uniqueDialogue || GetComponent<DialogueManager>() == null)
         {
-            GameObject.Find("UniqueDialogue").GetComponent<DialogueManager>().StartDialogue(speech, myImage, gameObject);
+            // Start the dialogue. The if statement checks if the start or end of the conversation is reached. 
+            if(GameObject.Find("UniqueDialogue").GetComponent<DialogueManager>().StartDialogue(speech, myImage, gameObject, disableDistanceCheck))
+            {
+                if(startedInteraction)
+                {
+                    onEndInteraction.Invoke();
+                }
+                else
+                {
+                    onStartInteraction.Invoke();
+                }
+
+                startedInteraction = !startedInteraction;
+            }
+
+            onInteract.Invoke();
         }
         else
         {
-            GetComponent<DialogueManager>().StartDialogue(speech, myImage, gameObject);
+            // Start the dialogue. The if statement checks if the start or end of the conversation is reached. 
+            if (GetComponent<DialogueManager>().StartDialogue(speech, myImage, gameObject, disableDistanceCheck))
+            {
+                if (startedInteraction)
+                {
+                    onEndInteraction.Invoke();
+                }
+                else
+                {
+                    onStartInteraction.Invoke();
+                }
+
+                startedInteraction = !startedInteraction;
+            }
+
+            onInteract.Invoke();
         }
+    }
+
+    public void ForceEndDialogue()
+    {
+        if(uniqueDialogue || GetComponent<DialogueManager>() == null)
+        {
+            GameObject.Find("UniqueDialogue").GetComponent<DialogueManager>().EndDialogue();
+        }
+        else
+        {
+            GetComponent<DialogueManager>().EndDialogue();
+        }
+        
+        onEndInteraction.Invoke();
+        startedInteraction = false;
     }
 }
 
