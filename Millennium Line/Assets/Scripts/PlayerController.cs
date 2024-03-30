@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     bool jumpPressed = false;
     bool sprintEnabled = false;
 
-    private Vector2 boxSize = new Vector2(0.2f, 0.2f);
+    private Vector2 boxSize = new Vector2(0.4f, 0.4f);
 
     enum MovementState
     {
@@ -224,6 +224,7 @@ public class PlayerController : MonoBehaviour
                 if (rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
                 {
                     rc.transform.GetComponent<Interactable>().Interact();
+                    Debug.Log("interacted");
                     return; //Return so that we only interact with one item at a time.
                 }
             }

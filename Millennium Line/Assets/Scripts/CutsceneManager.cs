@@ -36,7 +36,7 @@ public class CutsceneManager : MonoBehaviour
             Debug.Log(3 * (1 - Mathf.Pow(1.1f, -(Mathf.Abs(busObject.transform.position.x - endBusMarker.position.x) / 30f))));
             busObject.transform.position += Vector3.right * Mathf.Max(3*(1-Mathf.Pow(1.1f, -(Mathf.Abs(busObject.transform.position.x - endBusMarker.position.x) / 30f))), 0.001f);
 
-            transform.GetChild(0).GetChild(0).GetComponent<Image>().color = new Color(0,0,0, 1 - Mathf.Min(time / 3f, 1));
+            //transform.GetChild(0).GetChild(0).GetComponent<Image>().color = new Color(0,0,0, 1 - Mathf.Min(time / 3f, 1));
             time += Time.deltaTime;
 
             yield return new WaitForEndOfFrame();
