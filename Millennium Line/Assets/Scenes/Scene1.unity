@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0054191444, g: 0.007832992, b: 0.017162085, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4831,14 +4831,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phone: {fileID: 831571242}
-  tabButtons: []
-  tabs: []
-  inventory: {fileID: 1358308519}
-  inventoryButton: {fileID: 1676278774}
-  quests: {fileID: 758714194}
-  questsButton: {fileID: 1753726664}
-  contacts: {fileID: 1892424902}
-  contactsButton: {fileID: 1676278773}
+  tabButtons:
+  - {fileID: 1676278774}
+  - {fileID: 1753726664}
+  - {fileID: 1676278773}
+  tabs:
+  - {fileID: 1358308519}
+  - {fileID: 758714194}
+  - {fileID: 1892424902}
   numTabs: 3
   questButtons: []
   questInfos: []
@@ -6067,7 +6067,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0006887856, y: -246.93753}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 452.44, y: 113.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036812992
@@ -6124,8 +6124,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
