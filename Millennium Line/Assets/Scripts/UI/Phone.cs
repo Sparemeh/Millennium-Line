@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,14 +11,11 @@ public class Phone : MonoBehaviour
     public GameObject phone;
     public GameObject[] tabButtons;
     public GameObject[] tabs;
-    public GameObject inventory;
-    public GameObject inventoryButton;
-    public GameObject quests;
-    public GameObject questsButton;
-    public GameObject contacts;
-    public GameObject contactsButton;
     public int numTabs = 3;
     private int activeTab = 42069;
+
+    private bool moving;
+    private bool up;
 
 
     public GameObject[] questButtons;
@@ -33,22 +31,15 @@ public class Phone : MonoBehaviour
         phone.SetActive(true);
         questInfoHolder.SetActive(true);
 
-        tabs = new GameObject[numTabs];
-        tabButtons = new GameObject[numTabs];
-        tabs[0] = inventory;
-        Debug.Log(tabs[0]);
-        tabs[1] = quests;
-        tabs[2] = contacts;
-
-        tabButtons[0] = inventoryButton;
-        tabButtons[1] = questsButton;
-        tabButtons[2] = contactsButton;
-
         numQuests = 2;
         questButtons = new GameObject[numQuests];
         questInfos = new GameObject[numQuests+1];
+
+        moving = false;
+        up = false;
+
         
-        
+
         //initializes the quest info pages
         for (int x = 0; x <= numQuests; x++)
         {
@@ -70,22 +61,61 @@ public class Phone : MonoBehaviour
 
         //initializes contact info page
         questInfoHolder.SetActive(false);
-        phone.SetActive(false);
+        //phone.SetActive(false);
+
 
     }
+    private Vector3 targetPosition;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+
+        if (Input.GetKeyDown(KeyCode.P) && !moving)
         {
-            phone.SetActive(!phone.activeSelf);
+            //phone.SetActive(!phone.activeSelf);
+            moving = !moving;
+
         }
+
+        if (moving)
+        {
+            if (up)
+            {
+                phone.transform.position += new Vector3(0, -2, 0);
+
+                if (phone.transform.position.y <= -100)
+                {
+                    moving = false;
+                    up = false;
+                }
+            } 
+            else
+            {
+                phone.transform.position += new Vector3(0, 2, 0);
+
+                if (phone.transform.position.y >= 160)
+                {
+                    moving = false;
+                    up = true;
+                }
+            }
+            
+        }
+
+        
+    }
+
+    private void phoneAnimation()
+    {
+        
     }
 
     public void ButtonClick(int button)
     {
+        Debug.Log(button);
         tabs[button].SetActive(true);
+
         activeTab = button;
         foreach (GameObject y in tabButtons)
         {

@@ -31,7 +31,6 @@ public class PlayerControllerSide : MonoBehaviour
         Debug.Log(movementValue.Get<float>());
         goingToJump = movementValue.Get<float>() != 0;
     }
-    
 
     void Update()
     {
