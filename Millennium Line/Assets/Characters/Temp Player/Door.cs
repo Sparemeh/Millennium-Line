@@ -9,6 +9,8 @@ public class Door : Toggleable
     private SpriteRenderer sr;
     private bool isOpen;
     public BoxCollider2D gateCollider;
+    public Light statusLight;
+    public AudioSource audioSrc;
 
     void Start()
     {
@@ -21,11 +23,15 @@ public class Door : Toggleable
         if (isOpen)
         {
             sr.sprite = closed;
+            statusLight.color = Color.red;
+            
         }
         else
         {
             sr.sprite = open;
-            
+            statusLight.color = Color.green;
+            audioSrc.Play();
+
         }
         gateCollider.enabled = isOpen;
         isOpen = !isOpen;
