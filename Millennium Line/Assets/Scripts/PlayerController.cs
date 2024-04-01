@@ -48,12 +48,15 @@ public class PlayerController : MonoBehaviour
     Vector2 movementInput;
     bool facingRight = true;
     Rigidbody2D rb;
+    [SerializeField] Animator animator;
 
     bool gravityEnabled = true; //variable to indicate whether gravity on (off when hanging on ledges or climbing ladders)
     bool playerControlled = true; //variable to indicate whether player has control (off when mantling)
 
     bool jumpPressed = false;
     bool sprintEnabled = false;
+
+    bool isMoving = false;
 
     private Vector2 boxSize = new Vector2(0.4f, 0.4f);
 
@@ -245,6 +248,17 @@ public class PlayerController : MonoBehaviour
         // Depending on the movement state, a different part of the code will run. 
 
         facingRight = Mathf.Sign(movementInput.x) == 1;
+        
+        if (Mathf.Abs(rb.velocity.x) > 0)
+        {
+            isMoving = true;
+            
+        } else
+        {
+            isMoving = false;
+        }
+
+        animator.SetBool("isMoving", isMoving);
 
         if (movementState == MovementState.Normal)
         {
