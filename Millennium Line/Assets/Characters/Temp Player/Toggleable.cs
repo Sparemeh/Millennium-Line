@@ -8,7 +8,7 @@ public abstract class Toggleable : Interactable //Inherits from Interactable cla
 {
     public Sprite open;
     public Sprite closed;
-
+    
 
     private SpriteRenderer sr;
     private bool isOpen;
@@ -46,5 +46,4 @@ public abstract class Toggleable : Interactable //Inherits from Interactable cla
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = closed;   
     }
-
 }
