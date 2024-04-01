@@ -4,6 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.Rendering.HighDefinition;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class circuitPuzzle : Toggleable
 {
@@ -16,10 +17,12 @@ public class circuitPuzzle : Toggleable
     public Sprite lightOn;
     public Sprite lightOff;
 
+    public GameObject[] backLights;
     public GameObject[] lights;
     public SpriteRenderer[] lightSprites;
     public int[] correctSeq;
     public int[] inputSeq;
+    public GameObject gate;
 
 
     void Start()
@@ -42,10 +45,12 @@ public class circuitPuzzle : Toggleable
             if (correctSeq[i] == 1)
             {
                 lightSprites[i].sprite = lightOn;
+                backLights[i].SetActive(true);
             }
             else
             {
                 lightSprites[i].sprite = lightOff;
+                backLights[i].SetActive(false);
             }
         }
     }
@@ -73,10 +78,6 @@ public class circuitPuzzle : Toggleable
             boardOpen = false;
             interacting = false;
         }
-        if (allGood())
-        {
-            Debug.Log("puzzle solved");
-        }
     }
     
     public void switchFlick(int switchNo)
@@ -86,11 +87,18 @@ public class circuitPuzzle : Toggleable
         {
             inputSeq[switchNo] = 0;
             lightSprites[switchNo].sprite = lightOff;
+            backLights[switchNo].SetActive(false);
         }
         else
         {
             inputSeq[switchNo] = 1;
             lightSprites[switchNo].sprite = lightOn;
+            backLights[switchNo].SetActive(true);
+        }
+        if (allGood())
+        {
+            Debug.Log("puzzle solved");
+            gate.GetComponent<Door>().toggle();
         }
 
     }
