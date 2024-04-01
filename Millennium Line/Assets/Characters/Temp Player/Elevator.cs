@@ -5,6 +5,7 @@ using UnityEngine;
 public class Elevator : Interactable
 {
     public Animator animator;
+    public Animator playerAnimator;
     
     public override void Interact()
     {
