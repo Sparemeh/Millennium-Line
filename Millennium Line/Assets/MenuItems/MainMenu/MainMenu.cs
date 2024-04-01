@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame(){
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Scene1");
     }
 
     public void QuitGame(){
