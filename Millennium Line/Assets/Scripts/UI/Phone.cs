@@ -11,6 +11,12 @@ public class Phone : MonoBehaviour
     public GameObject phone;
     public GameObject[] tabButtons;
     public GameObject[] tabs;
+    public GameObject inventory;
+    public GameObject inventoryButton;
+    public GameObject quests;
+    public GameObject questsButton;
+    public GameObject contacts;
+    public GameObject contactsButton;
     public int numTabs = 3;
     private int activeTab = 42069;
 
@@ -30,6 +36,17 @@ public class Phone : MonoBehaviour
     {
         phone.SetActive(true);
         questInfoHolder.SetActive(true);
+
+        tabs = new GameObject[numTabs];
+        tabButtons = new GameObject[numTabs];
+        tabs[0] = inventory;
+        Debug.Log(tabs[0]);
+        tabs[1] = quests;
+        tabs[2] = contacts;
+
+        tabButtons[0] = inventoryButton;
+        tabButtons[1] = questsButton;
+        tabButtons[2] = contactsButton;
 
         numQuests = 2;
         questButtons = new GameObject[numQuests];
@@ -61,7 +78,7 @@ public class Phone : MonoBehaviour
 
         //initializes contact info page
         questInfoHolder.SetActive(false);
-        //phone.SetActive(false);
+        phone.SetActive(false);
 
 
     }
@@ -70,7 +87,8 @@ public class Phone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
+        Debug.Log(phone.transform.position);
         if (Input.GetKeyDown(KeyCode.P) && !moving)
         {
             //phone.SetActive(!phone.activeSelf);

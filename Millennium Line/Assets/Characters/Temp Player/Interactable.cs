@@ -6,7 +6,6 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
-
     
     private void Reset() 
     {
@@ -15,20 +14,5 @@ public abstract class Interactable : MonoBehaviour
 
     public abstract void Interact();
 
-    //private void OnTriggerEnter2D(Collider2D collision) //Runs DisplayInteraction() if the detected obj is player
-    //{
-    //    if(collision.CompareTag("Player")) 
-    //    {
-    //        collision.GetComponent<PlayerController>().DisplayInteraction(); 
-    //    }
-    //}
-
-    //private void OnTriggerExit2D(Collider2D collision) //Runs HideInteraction() if the detected obj is player
-    //{
-    //    if(collision.CompareTag("Player"))
-    //    {
-    //        collision.GetComponent<PlayerController>().HideInteraction();
-    //    }
-    //}
-
+    
 }
