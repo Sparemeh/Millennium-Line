@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1531173927172916843
+--- !u!114 &-7680494608071234363
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23,8 +23,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: scene3_elecpanel
-  m_Shader: {fileID: -6465566751694194690, guid: f755920b1f505e34cbb90cf68f277f07, type: 3}
+  m_Name: sc1_station_wall2
+  m_Shader: {fileID: -6465566751694194690, guid: 23ef78ea651994b43ad4924ad7ecc57b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -47,7 +47,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _habour_img:
-        m_Texture: {fileID: 2800000, guid: 311fd0c5936ae954ba5a2984c9a62370, type: 3}
+        m_Texture: {fileID: 2800000, guid: f8af9fd111bff3e47858643bdd797930, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
