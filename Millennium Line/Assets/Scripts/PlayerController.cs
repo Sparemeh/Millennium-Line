@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
             foreach (RaycastHit2D rc in hits)
             {
 
-                if (rc.transform.GetComponent<npcObject>()) //check if the hit obj is an npc
+                //if (rc.transform.GetComponent<npcObject>()) //check if the hit obj is an npc
 
                 if (rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
 

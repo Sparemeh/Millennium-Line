@@ -5,6 +5,7 @@ using UnityEngine;
 public class Elevator : Interactable
 {
     public Animator animator;
+    public Animator playerAnimator;
     
     public override void Interact()
     {
@@ -14,6 +15,6 @@ public class Elevator : Interactable
     public override bool Interact(bool returnSuccess)
     {
         animator.SetTrigger("ActivateElevator");
-        return false;
+        return true;
     }
 }

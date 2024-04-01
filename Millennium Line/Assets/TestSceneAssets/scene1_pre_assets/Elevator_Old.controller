@@ -44,9 +44,9 @@ AnimatorState:
   m_Mirror: 0
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5a23e65e499327b4789b7ee555ee762a, type: 2}
+  m_CycleOffsetParameterActive: 
+  m_TimeParameterActive: 00
+  m_Motion: {fileID: 7400000, guid: ec05c0ddfe577f74b8219cb31502739d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -83,7 +83,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Elevator
+  m_Name: Elevator_Old
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: ActivateElevator
@@ -148,7 +148,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4909a5fa3d4adbf4da86834b5af7ba36, type: 2}
+  m_Motion: {fileID: 7400000, guid: a56f229290a8b554f824e918f6c837e3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
