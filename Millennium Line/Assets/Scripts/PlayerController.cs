@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 boxSize = new Vector2(0.4f, 0.4f);
 
+    npcObject currentNPC;
+
     enum MovementState
     {
         Normal,
@@ -219,20 +221,50 @@ public class PlayerController : MonoBehaviour
     private void CheckInteraction() //Uses raycast to check for collision
     {
         RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, boxSize, 0, Vector2.zero); //stores all hit objects in array
+        bool npcInteractedWith = false;
 
         if (hits.Length > 0)
         {
             foreach (RaycastHit2D rc in hits)
             {
-                if (rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
+                if (rc.transform.GetComponent<npcObject>()) //check if the hit obj is an npc
                 {
-                    rc.transform.GetComponent<Interactable>().Interact();
-                    Debug.Log("interacted");
+                    if (currentNPC != null && !currentNPC.Equals(rc.transform.GetComponent<npcObject>())) currentNPC.GetComponent<npcObject>().ForceEndDialogue();
+                    
+                    if(rc.transform.GetComponent<Interactable>().Interact(false))
+                        currentNPC = rc.transform.GetComponent<npcObject>();
+                    else
+                        currentNPC = null;
+                    
+
                     return; //Return so that we only interact with one item at a time.
                 }
+                else if(rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
+                {
+                    rc.transform.GetComponent<Interactable>().Interact();
+                    return; //Return so that we only interact with one item at a time.
+                }
+                else
+                {
+                    if (currentNPC != null && !npcInteractedWith)
+                    {
+                        // The conversation reached its end
+                        if (!currentNPC.transform.GetComponent<Interactable>().Interact(false))
+                        {
+                            currentNPC = null;
+                        }
+                        npcInteractedWith = true;
+                    }
+                }
+                
             }
         }
 
+    }
+
+    public void SetInteractableNPC(npcObject npc)
+    {
+        currentNPC = npc;
     }
 
     // Start is called before the first frame update

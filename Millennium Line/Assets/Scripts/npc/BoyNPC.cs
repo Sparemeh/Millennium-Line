@@ -9,6 +9,7 @@ public class BoyNPC : MonoBehaviour
     [SerializeField] float runSpeed = 2f;
 
     bool startRun = false;
+    bool droppedMusicBox = false;
 
     private void Update()
     {
@@ -21,7 +22,12 @@ public class BoyNPC : MonoBehaviour
     // Drop the music box by spawing the box
     public void DropMusicBox()
     {
-        Instantiate(musicBoxItem, transform.position, transform.rotation);
+        if (!droppedMusicBox)
+        {
+            Instantiate(musicBoxItem, transform.position, transform.rotation);
+            droppedMusicBox = true;
+        }
+        
     }
 
     // Set a velocity going to the right, and despawn after 5 seconds

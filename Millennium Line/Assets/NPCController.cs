@@ -5,6 +5,12 @@ using UnityEngine;
 public class NPCController : Interactable
 {
     
+    public override bool Interact(bool r)
+    {
+        Debug.Log("interacting with player");
+        return false;
+    }
+
     public override void Interact()
     {
         Debug.Log("interacting with player");

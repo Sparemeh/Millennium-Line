@@ -13,6 +13,7 @@ public abstract class Interactable : MonoBehaviour
         GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
+    public abstract bool Interact(bool returnSuccess);
     public abstract void Interact();
 
     //private void OnTriggerEnter2D(Collider2D collision) //Runs DisplayInteraction() if the detected obj is player

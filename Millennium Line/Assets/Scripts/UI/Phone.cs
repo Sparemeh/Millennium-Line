@@ -66,44 +66,30 @@ public class Phone : MonoBehaviour
 
     }
     private Vector3 targetPosition;
+    bool phoneUp = false;
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.P) && !moving)
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            //phone.SetActive(!phone.activeSelf);
-            moving = !moving;
-
+            phoneUp = !phoneUp;
+            if (phoneUp) phone.GetComponent<Animator>().SetTrigger("PhoneUp");
+            else phone.GetComponent<Animator>().SetTrigger("PhoneDown");
         }
 
-        if (moving)
-        {
-            if (up)
-            {
-                phone.transform.position += new Vector3(0, -2, 0);
+    }
 
-                if (phone.transform.position.y <= -100)
-                {
-                    moving = false;
-                    up = false;
-                }
-            } 
-            else
-            {
-                phone.transform.position += new Vector3(0, 2, 0);
+    public void OpenPhone()
+    {
+        phone.GetComponent<Animator>().SetTrigger("PhoneUp");
+        phoneUp = true;
+    }
 
-                if (phone.transform.position.y >= 160)
-                {
-                    moving = false;
-                    up = true;
-                }
-            }
-            
-        }
-
-        
+    public void ClosePhone()
+    {
+        phone.GetComponent<Animator>().SetTrigger("PhoneDown");
+        phoneUp = false;
     }
 
     private void phoneAnimation()

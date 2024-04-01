@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
     // Starts dialogue, returns whether or not the dialogue just started or ended
     public bool StartDialogue(Speech speech, Sprite Givenimage, GameObject npc, bool disableDistanceCheck)
     {
+        Debug.Log("4");
         this.disableDistanceCheck = disableDistanceCheck;
 
         if(sentences.Count == 0 && !inConversation) {

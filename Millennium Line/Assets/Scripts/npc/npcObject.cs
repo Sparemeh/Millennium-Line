@@ -19,10 +19,22 @@ public class npcObject : Interactable
 
     bool startedInteraction = false;
 
+    public override bool Interact(bool returnSuccess)
+    {
+        if(interactable) {
+            return TriggerDialogue();
+        }
+
+        return false;
+
+    }
+
     public override void Interact()
     {
-        if(interactable) TriggerDialogue();
-
+        if (interactable)
+        {
+            TriggerDialogue();
+        }
     }
 
     // Start is called before the first frame update
@@ -50,7 +62,8 @@ public class npcObject : Interactable
 
     }
 
-    void TriggerDialogue() {
+    // Returns true if the end of the conversation is not reached
+    bool TriggerDialogue() {
 
         //FindObjectOfType<DialogueManager>().StartDialogue(speech, myImage);
         if (uniqueDialogue || GetComponent<DialogueManager>() == null)
@@ -61,6 +74,9 @@ public class npcObject : Interactable
                 if(startedInteraction)
                 {
                     onEndInteraction.Invoke();
+                    onInteract.Invoke();
+                    startedInteraction = false;
+                    return false;
                 }
                 else
                 {
@@ -80,6 +96,9 @@ public class npcObject : Interactable
                 if (startedInteraction)
                 {
                     onEndInteraction.Invoke();
+                    onInteract.Invoke();
+                    startedInteraction = false;
+                    return false;
                 }
                 else
                 {
@@ -91,6 +110,8 @@ public class npcObject : Interactable
 
             onInteract.Invoke();
         }
+
+        return true;
     }
 
     public void ForceEndDialogue()

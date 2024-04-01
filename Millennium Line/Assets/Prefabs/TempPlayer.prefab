@@ -238,12 +238,13 @@ MonoBehaviour:
   - {fileID: 1063680778867873393}
   environmentLayers:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 1
   tagExceptions:
   - Finish
   climbableLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
+  animator: {fileID: 0}
 --- !u!70 &4756871709375874420
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

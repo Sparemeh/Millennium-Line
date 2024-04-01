@@ -13,9 +13,16 @@ public abstract class Toggleable : Interactable //Inherits from Interactable cla
     private SpriteRenderer sr;
     private bool isOpen;
 
-    public override void Interact() //Toggles between open and closed sprite
+    public override bool Interact(bool r) //Toggles between open and closed sprite
     {
         
+        toggle();
+        Debug.Log("interacting");
+        return false;
+    }
+
+    public override void Interact()
+    {
         toggle();
         Debug.Log("interacting");
     }
