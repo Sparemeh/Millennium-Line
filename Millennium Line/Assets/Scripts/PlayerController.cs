@@ -224,6 +224,7 @@ public class PlayerController : MonoBehaviour
         {
             foreach (RaycastHit2D rc in hits)
             {
+                Debug.Log(rc.transform.position);
                 if (rc.transform.GetComponent<Interactable>()) //check if the hit obj is interactable
                 {
                     rc.transform.GetComponent<Interactable>().Interact();
