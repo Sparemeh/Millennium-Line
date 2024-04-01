@@ -10,4 +10,10 @@ public class Elevator : Interactable
     {
         animator.SetTrigger("ActivateElevator");
     }
+
+    public override bool Interact(bool returnSuccess)
+    {
+        animator.SetTrigger("ActivateElevator");
+        return false;
+    }
 }
