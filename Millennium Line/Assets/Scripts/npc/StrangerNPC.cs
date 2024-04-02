@@ -7,6 +7,7 @@ public class StrangerNPC : MonoBehaviour
     [SerializeField] Phone phone;
     [SerializeField] GameObject callPanel;
     [SerializeField] circuitPuzzle puzzle;
+    [SerializeField] AudioSource ringtone;
 
     bool calledPlayer = false;
     bool calling = false;
@@ -25,11 +26,13 @@ public class StrangerNPC : MonoBehaviour
         {
             TriggerStrangerDialogue();
             calledPlayer = false;
+            ringtone.Stop();
         }
 
         if (puzzle.puzzleFinished && !calling)
         {
             CallPlayer();
+            
             calling = true;
         }
     }
@@ -41,6 +44,7 @@ public class StrangerNPC : MonoBehaviour
         callPanel.SetActive(true);
         calledPlayer = true;
         finishedCall = true;
+        ringtone.Play();
     }
 
     public void TriggerStrangerDialogue()

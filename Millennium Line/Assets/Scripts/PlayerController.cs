@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float ladderSpeed;
     [SerializeField] float hangSpeed;
     [SerializeField] Collider2D[] heightCheckColliders;
+    [SerializeField] GameObject playerSprite;
 
     // The layers in which the player can mount/move on
     [SerializeField] LayerMask environmentLayers;
@@ -61,6 +62,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 boxSize = new Vector2(0.4f, 0.4f);
 
     npcObject currentNPC;
+
+    private float spriteXNeg;
 
     enum MovementState
     {
@@ -275,6 +278,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteXNeg = -playerSprite.transform.localScale.x;
         //movementState = MovementState.Normal;
     }
 
@@ -292,6 +296,15 @@ public class PlayerController : MonoBehaviour
         } else
         {
             isMoving = false;
+        }
+
+        if (rb.velocity.x > 0)
+        {
+            playerSprite.transform.localScale = new Vector3(-spriteXNeg, playerSprite.transform.localScale.y, playerSprite.transform.localScale.z);
+        } 
+        if (rb.velocity.x < 0)
+        {
+            playerSprite.transform.localScale = new Vector3(spriteXNeg, playerSprite.transform.localScale.y, playerSprite.transform.localScale.z);
         }
 
         animator.SetBool("isMoving", isMoving);
