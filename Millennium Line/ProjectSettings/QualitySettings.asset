@@ -31,7 +31,7 @@ QualitySettings:
     vSyncCount: 0
     realtimeGICPUUsage: 25
     lodBias: 0.3
-    maximumLODLevel: 0
+    maximumLODLevel: 1
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -80,7 +80,7 @@ QualitySettings:
     vSyncCount: 0
     realtimeGICPUUsage: 25
     lodBias: 0.4
-    maximumLODLevel: 0
+    maximumLODLevel: 1
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -129,7 +129,7 @@ QualitySettings:
     vSyncCount: 1
     realtimeGICPUUsage: 25
     lodBias: 0.7
-    maximumLODLevel: 0
+    maximumLODLevel: 1
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -178,7 +178,7 @@ QualitySettings:
     vSyncCount: 1
     realtimeGICPUUsage: 50
     lodBias: 1
-    maximumLODLevel: 0
+    maximumLODLevel: 1
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -227,7 +227,7 @@ QualitySettings:
     vSyncCount: 1
     realtimeGICPUUsage: 50
     lodBias: 1.5
-    maximumLODLevel: 0
+    maximumLODLevel: 1
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1

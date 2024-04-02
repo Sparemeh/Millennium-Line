@@ -12,6 +12,7 @@ public class Door : Toggleable
     public Light statusLight;
     public AudioSource audioSrc;
 
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();

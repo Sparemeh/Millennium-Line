@@ -187,7 +187,7 @@ MonoBehaviour:
         m_SchemaId:
           m_Id: With3Levels
     maximumLODLevel:
-      m_Values: 010000000100000000000000
+      m_Values: 010000000100000001000000
       m_SchemaId:
         m_Id: With3Levels
     lodBias:
