@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.005347169, g: 0.007745818, b: 0.017092587, a: 1}
+  m_IndirectSpecularColor: {r: 0.005416335, g: 0.007828788, b: 0.017153237, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -899,7 +899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Millenium Line
+  m_text: Millennium Line
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 414ce364896648e49ad4051d2d5015f7, type: 2}
   m_sharedMaterial: {fileID: -2004964204710931545, guid: 414ce364896648e49ad4051d2d5015f7, type: 2}
@@ -926,7 +926,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 69.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16855,7 +16855,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: -1920, y: -1080.5195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1829926188

@@ -24,11 +24,14 @@ public class circuitPuzzle : Toggleable
     public int[] inputSeq;
     public GameObject gate;
 
+    public bool puzzleFinished;
+
 
     void Start()
     {
         lightSprites = new SpriteRenderer[9];
         inputSeq = correctSeq;
+        puzzleFinished = false;
 
         Debug.Log("is this thing on??");
         input = player.GetComponent<PlayerInput>();
@@ -98,7 +101,7 @@ public class circuitPuzzle : Toggleable
         if (allGood())
         {
             Debug.Log("puzzle solved");
-            gate.GetComponent<Door>().toggle();
+            puzzleFinished = true;
         }
 
     }

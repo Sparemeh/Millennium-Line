@@ -6,8 +6,11 @@ public class StrangerNPC : MonoBehaviour
 {
     [SerializeField] Phone phone;
     [SerializeField] GameObject callPanel;
+    [SerializeField] circuitPuzzle puzzle;
 
     bool calledPlayer = false;
+    bool calling = false;
+    public bool finishedCall = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +21,16 @@ public class StrangerNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && calledPlayer)
+        if(Input.GetKeyDown(KeyCode.E) && calledPlayer)
         {
             TriggerStrangerDialogue();
             calledPlayer = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+        if (puzzle.puzzleFinished && !calling)
         {
             CallPlayer();
+            calling = true;
         }
     }
 
@@ -36,6 +40,7 @@ public class StrangerNPC : MonoBehaviour
         phone.OpenPhone();
         callPanel.SetActive(true);
         calledPlayer = true;
+        finishedCall = true;
     }
 
     public void TriggerStrangerDialogue()
